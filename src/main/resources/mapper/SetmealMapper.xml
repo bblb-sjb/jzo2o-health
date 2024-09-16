@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jzo2o.health.mapper.SetmealMapper">
+
+    <select id="findDetail" resultMap="SetmealDetailMap">
+        SELECT
+            s.id AS id,
+            s.name AS name,
+            s.sex,
+            s.age,
+            s.price,
+            s.img,
+            s.remark,
+            g.id AS group_id,
+            g.name AS group_name,
+            i.id AS item_id,
+            i.name AS item_name
+        FROM
+            setmeal AS s
+                LEFT JOIN setmeal_checkgroup ON setmeal_checkgroup.setmeal_id = s.id
+                LEFT JOIN checkgroup AS g ON setmeal_checkgroup.checkgroup_id = g.id
+                LEFT JOIN checkgroup_checkitem ON checkgroup_checkitem.checkgroup_id = g.id
+                LEFT JOIN checkitem AS i ON checkgroup_checkitem.checkitem_id = i.id
+        WHERE
+            s.id = #{id}
+    </select>
+
+    <!--手动的映射-->
+    <resultMap id="SetmealDetailMap" type="com.jzo2o.health.model.dto.response.SetmealDetailResDTO">
+        <!--id映射主键字段-->
+        <id column="id" property="id"></id>
+        <!--result映射普通字段-->
+        <result column="name" property="name"></result>
+        <result column="sex" property="sex"></result>
+        <result column="age" property="age"></result>
+        <result column="price" property="price"></result>
+        <result column="img" property="img"></result>
+        <result column="remark" property="remark"></result>
+
+        <!--column 数据库中的字段名-->
+        <!--property 实体类中对应的属性 该关键字可以省略... -->
+        <!--ofType 是javaType中的单个对象类型-->
+        <collection property="checkGroupList"  resultMap="CheckGroupDetailMap">
+
+        </collection>
+    </resultMap>
+
+
+    <!--手动的映射-->
+    <resultMap id="CheckGroupDetailMap" type="com.jzo2o.health.model.dto.response.CheckGroupDetailResDTO">
+        <!--id映射主键字段-->
+        <id column="group_id" property="id"></id>
+        <!--result映射普通字段-->
+        <result column="group_name" property="name"></result>
+
+        <!--column 数据库中的字段名-->
+        <!--property 实体类中对应的属性 该关键字可以省略... -->
+        <!--ofType 是javaType中的单个对象类型-->
+        <collection property="checkItemList"  ofType="com.jzo2o.health.model.dto.response.CheckItemResDTO">
+            <id column="item_id" property="id"></id>
+            <result column="item_name" property="name"></result>
+        </collection>
+    </resultMap>
+</mapper>
