@@ -2,12 +2,14 @@ package com.jzo2o.health.controller.user;
 
 import com.jzo2o.health.model.dto.response.OrdersDetailResDTO;
 import com.jzo2o.health.model.dto.response.OrdersResDTO;
+import com.jzo2o.health.service.IOrdersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,6 +20,9 @@ import java.util.List;
 @Api(tags = "用户端 - 订单查询相关接口")
 public class OrdersQueryController {
 
+    @Resource
+    private IOrdersService ordersService;
+
     @ApiOperation("滚动分页查询")
     @GetMapping("/page")
     @ApiImplicitParams({
@@ -26,7 +31,7 @@ public class OrdersQueryController {
     })
     public List<OrdersResDTO> pageQuery(@RequestParam(value = "ordersStatus", required = false) Integer ordersStatus,
                                         @RequestParam(value = "sortBy", required = false) Long sortBy) {
-        return null;
+        return ordersService.pageQuery(ordersStatus, sortBy);
     }
 
     @GetMapping("/{id}")
@@ -35,7 +40,7 @@ public class OrdersQueryController {
             @ApiImplicitParam(name = "id", value = "订单id", required = true, dataTypeClass = Long.class)
     })
     public OrdersDetailResDTO detail(@PathVariable("id") Long id) {
-        return null;
+        return ordersService.getDetailById(id);
     }
 
 }

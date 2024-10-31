@@ -78,6 +78,10 @@
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.jzo2o</groupId>
+            <artifactId>jzo2o-sentinel</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

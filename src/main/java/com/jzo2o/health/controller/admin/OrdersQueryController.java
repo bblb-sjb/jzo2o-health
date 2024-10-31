@@ -4,6 +4,7 @@ import com.jzo2o.common.model.PageResult;
 import com.jzo2o.health.model.dto.request.OrdersPageQueryReqDTO;
 import com.jzo2o.health.model.dto.response.AdminOrdersDetailResDTO;
 import com.jzo2o.health.model.dto.response.OrdersResDTO;
+import com.jzo2o.health.service.IOrdersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 /**
  * @author itcast
  */
@@ -21,10 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "管理端 - 订单查询接口")
 public class OrdersQueryController {
 
+    @Resource
+    private IOrdersService ordersService;
+
+
     @ApiOperation("分页查询")
     @GetMapping("/page")
     public PageResult<OrdersResDTO> pageQuery(OrdersPageQueryReqDTO ordersPageQueryReqDTO) {
-        return null;
+        return ordersService.adminPageQuery(ordersPageQueryReqDTO);
     }
 
     @GetMapping("/{id}")
@@ -33,7 +40,7 @@ public class OrdersQueryController {
             @ApiImplicitParam(name = "id", value = "订单id", required = true, dataTypeClass = Long.class)
     })
     public AdminOrdersDetailResDTO aggregation(@PathVariable("id") Long id) {
-        return null;
+        return ordersService.adminAggregation(id);
     }
 
 }

@@ -3,8 +3,10 @@ package com.jzo2o.health.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jzo2o.health.model.domain.Orders;
 import com.jzo2o.health.model.dto.OrderCountDTO;
+import com.jzo2o.health.service.IOrdersService;
 import org.apache.ibatis.annotations.Select;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 

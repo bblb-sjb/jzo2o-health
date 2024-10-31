@@ -47,6 +47,8 @@ spring:
             refresh: false
           - data-id: shared-rabbitmq.yaml # rabbitmq配置
             refresh: false
+          - data-id: shared-sentinel.yaml # sentinel配置
+            refresh: false
 
 #################     项目独有配置     #################
 mysql:
