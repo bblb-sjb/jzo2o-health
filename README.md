@@ -1,4 +1,6 @@
 # 说明
+**本代码的初始工程均来自于黑马程序员，感谢黑马程序员的辛苦付出**
+
 ![image](https://github.com/user-attachments/assets/2d224508-cdcf-410f-a3fc-5cc6d2cbb70a)
 
 ## 1.1 初始开发请使用dev01分支，为默认版本
